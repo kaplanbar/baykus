@@ -1,0 +1,87 @@
+@import com.baykus.models.ComparisonReport
+
+@(comparisonReport: ComparisonReport)
+
+
+<style>
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 0.2fr 0.2fr 1fr;
+  grid-auto-columns: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "owl owl"
+    "info info"
+    "userinfo-1 userinfo-2"
+    "sourcecode-1 sourcecode-2";
+}
+
+.owl { grid-area: owl; }
+
+.info {
+    grid-area: info;
+    display: flex;
+    justify-content: center;
+    margin-top: 3em;
+    align-items: center;
+}
+
+.info ul {
+    list-style-type: none;
+}
+
+.userinfo-1 {
+    grid-area: userinfo-1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.userinfo-2 {
+  grid-area: userinfo-2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sourcecode-1 {
+  grid-area: sourcecode-1;
+  border: solid 2px black;
+  padding: 2%;
+}
+
+.sourcecode-2 {
+  grid-area: sourcecode-2;
+  border: solid 2px black;
+  margin-left: 2%;
+  padding: 2%;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+
+
+
+</style>
+
+
+<div class="container">
+    <div class="owl">
+        <img src="/api/images/owl.png" width="10%">
+    </div>
+    <div class="info">
+        <ul>
+            <li><b>Language: </b> @comparisonReport.language</li>
+            <li><b>Similarity: </b> @comparisonReport.similarity%</li>
+        </ul>
+    </div>
+    <div class="userinfo-1"><b>Username: </b>@comparisonReport.user1Info.user.value</div>
+    <div class="userinfo-2"><b>Username: </b>@comparisonReport.user2Info.user.value</div>
+    <div class="sourcecode-1">@Html(comparisonReport.user1Info.highlightedSourceCode)</div>
+    <div class="sourcecode-2">@Html(comparisonReport.user2Info.highlightedSourceCode)</div>
+</div>
